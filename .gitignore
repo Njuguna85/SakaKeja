@@ -1,3 +1,9 @@
 venv/
 real_estate/estate/migrations/
 real_estate/real_estate/__pycache__
+db.sqlite3
+*.log
+*.pot
+*.pyc
+/static
+/media
