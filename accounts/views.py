@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from contacts.models import Contact
 # Create your views here.
 
 def register(request):
@@ -35,7 +36,7 @@ def register(request):
                     user.save()
                     messages.success(request, "You are now Registered. Now Login")
                     return redirect('login')
-                        
+        # Display the error message        
         else:
             messages.error(request, 'Passwords Do Not Match!!')
             return redirect('register')
@@ -68,6 +69,11 @@ def logout(request):
         return redirect ('index')
 
 def dashboard(request):
-    return render (request, 'accounts/dashboard.html')
+    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+    
+    context={
+        'contacts': user_contacts
+    }
+    return render (request, 'accounts/dashboard.html', context)
 
 
