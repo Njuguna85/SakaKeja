@@ -66,7 +66,7 @@ def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.success(request,"You have been logged out")
-        return redirect ('index')
+    return redirect ('index')
 
 def dashboard(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
